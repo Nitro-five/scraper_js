@@ -1,0 +1,104 @@
+
+ NX   Running target serve for project casinocity and 1 task it depends on:
+
+
+Nx is configured to use the legacy cache. This cache will be removed in Nx 21. Read more at https://nx.dev/deprecated/legacy-cache.
+
+> nx run casinocity:build:production
+
+[1m[33mOption "isolatedConfig" is deprecated: Automatic configuration of Webpack is deprecated in favor of an explicit 'webpack.config.js' file. This option will be removed in Nx 20. See https://nx.dev/recipes/webpack/webpack-config-setup.[39m[22m
+assets by path *.json 131 KiB
+  asset package-lock.json 130 KiB [emitted]
+  asset package.json 509 bytes [emitted]
+asset main.js 27.7 KiB [emitted] [minimized] (name: main) 1 related asset
+asset 3rdpartylicenses.txt 122 bytes [emitted]
+cacheable modules 43.3 KiB
+  modules by path ./libs/ 36.8 KiB 30 modules
+  modules by path ./apps/casinocity/src/*.ts 6.48 KiB 3 modules
+external "tslib" 42 bytes [built] [code generated]
+external "crawlee" 42 bytes [built] [code generated]
+external "node:events" 42 bytes [built] [code generated]
+external "iso-639-1" 42 bytes [built] [code generated]
+external "chrono-node" 42 bytes [built] [code generated]
+external "kafkajs" 42 bytes [built] [code generated]
+external "@kafkajs/confluent-schema-registry" 42 bytes [built] [code generated]
+external "async-mutex" 42 bytes [built] [code generated]
+external "node:crypto" 42 bytes [built] [code generated]
+external "bunyan" 42 bytes [built] [code generated]
+external "axios" 42 bytes [built] [code generated]
+external "node:stream" 42 bytes [built] [code generated]
+webpack 5.97.1 compiled successfully in 3116 ms
+
+> nx run casinocity:serve:development
+
+[1m[33mOption "isolatedConfig" is deprecated: Automatic configuration of Webpack is deprecated in favor of an explicit 'webpack.config.js' file. This option will be removed in Nx 20. See https://nx.dev/recipes/webpack/webpack-config-setup.[39m[22m
+[1m[33mOption "isolatedConfig" is deprecated: Automatic configuration of Webpack is deprecated in favor of an explicit 'webpack.config.js' file. This option will be removed in Nx 20. See https://nx.dev/recipes/webpack/webpack-config-setup.[39m[22m
+asset package-lock.json 130 KiB [emitted]
+asset main.js 47.4 KiB [emitted] (name: main) 1 related asset
+asset package.json 509 bytes [emitted]
+cacheable modules 43.3 KiB
+  modules by path ./libs/ 36.8 KiB 30 modules
+  modules by path ./apps/casinocity/src/*.ts 6.48 KiB 3 modules
+external "tslib" 42 bytes [built] [code generated]
+external "crawlee" 42 bytes [built] [code generated]
+external "node:events" 42 bytes [built] [code generated]
+external "iso-639-1" 42 bytes [built] [code generated]
+external "chrono-node" 42 bytes [built] [code generated]
+external "kafkajs" 42 bytes [built] [code generated]
+external "@kafkajs/confluent-schema-registry" 42 bytes [built] [code generated]
+external "async-mutex" 42 bytes [built] [code generated]
+external "node:crypto" 42 bytes [built] [code generated]
+external "bunyan" 42 bytes [built] [code generated]
+external "axios" 42 bytes [built] [code generated]
+external "node:stream" 42 bytes [built] [code generated]
+webpack 5.97.1 compiled successfully in 3252 ms
+[1m[31mDebugger listening on ws://localhost:9229/753817a4-6541-471a-b179-cf8511fb27a6[39m[22m
+[1m[31mDebugger listening on ws://localhost:9229/753817a4-6541-471a-b179-cf8511fb27a6[39m[22m
+[1m[31mFor help, see: https://nodejs.org/en/docs/inspector[39m[22m
+[1m[31m[39m[22m
+[1m[31mDebugger listening on ws://localhost:9229/3f3e96f1-c9d5-416b-a480-ded9d3439613[39m[22m
+[1m[31mDebugger listening on ws://localhost:9229/3f3e96f1-c9d5-416b-a480-ded9d3439613[39m[22m
+[1m[31mFor help, see: https://nodejs.org/en/docs/inspector[39m[22m
+[1m[31m[39m[22m
+[1m[31m(node:39062) TimeoutNegativeWarning: -1741552925217 is a negative number.[39m[22m
+[1m[31mTimeout duration was set to 1.[39m[22m
+[1m[31m(Use `node --trace-warnings ...` to show where the warning was created)[39m[22m
+[1m[31m[39m[22m
+{"name":"CasinocityCrawler","hostname":"MacBook-Pro.local","pid":39062,"level":30,"msg":"Fetch initial requests from sitemaps { sitemaps: [ 'https://casinocity.com/sitemap.xml' ] }","time":"2025-03-09T20:42:05.218Z","v":0}
+{"name":"CasinocityCrawler","hostname":"MacBook-Pro.local","pid":39062,"level":30,"msg":"22806 urls fetched from sitemap","time":"2025-03-09T20:42:07.878Z","v":0}
+[34mDEBUG[39m[33m CheerioCrawler:SessionPool:[39m No 'persistStateKeyValueStoreId' options specified, this session pool's data has been saved in the KeyValueStore with the id: b813b5f7-98b2-4954-8dd9-e24d0f0dc3e6
+[34mDEBUG[39m[33m CheerioCrawler:SessionPool:[39m Recreating state from KeyValueStore[90m {"persistStateKey":"SDK_SESSION_POOL_STATE"}[39m
+[34mDEBUG[39m[33m CheerioCrawler:SessionPool:[39m 876 active sessions loaded from KeyValueStore
+[34mDEBUG[39m[33m CheerioCrawler:Statistics:[39m Recreating state from KeyValueStore[90m {"persistStateKey":"SDK_CRAWLER_STATISTICS_1"}[39m
+[34mDEBUG[39m[33m CheerioCrawler:Statistics:[39m Loaded from KeyValueStore
+[32mINFO[39m [33m CheerioCrawler:[39m Starting the crawler.
+[34mDEBUG[39m[33m CheerioCrawler:AutoscaledPool:Snapshotter:[39m Setting max memory of this run to 8192 MB. Use the CRAWLEE_MEMORY_MBYTES or CRAWLEE_AVAILABLE_MEMORY_RATIO environment variable to override it.
+[34mDEBUG[39m[33m CheerioCrawler:SessionPool:[39m Created new Session - session_WD4ZyWxxOd
+{"name":"ZyteHttpClient","hostname":"MacBook-Pro.local","pid":39062,"level":20,"msg":"send \"https://www.casinocity.com/nevada/las-vegas/news/page149/\" request through Zyte","time":"2025-03-09T20:42:15.017Z","v":0}
+[34mDEBUG[39m[33m CheerioCrawler:SessionPool:[39m Created new Session - session_ZZp3OfdyyQ
+{"name":"ZyteHttpClient","hostname":"MacBook-Pro.local","pid":39062,"level":20,"msg":"send \"https://www.casinocity.com/north-america/news/page1130/\" request through Zyte","time":"2025-03-09T20:42:15.028Z","v":0}
+[34mDEBUG[39m[33m CheerioCrawler:SessionPool:[39m Created new Session - session_6xrCQkOx3W
+{"name":"ZyteHttpClient","hostname":"MacBook-Pro.local","pid":39062,"level":20,"msg":"send \"https://www.casinocity.com/north-america/news/page141/\" request through Zyte","time":"2025-03-09T20:42:15.032Z","v":0}
+[34mDEBUG[39m[33m CheerioCrawler:SessionPool:[39m Created new Session - session_niQakhVJeM
+{"name":"ZyteHttpClient","hostname":"MacBook-Pro.local","pid":39062,"level":20,"msg":"send \"https://www.casinocity.com/arizona/flagstaff/navajo-blue-travel-plaza/map/nearest/\" request through Zyte","time":"2025-03-09T20:42:15.035Z","v":0}
+[34mDEBUG[39m[33m CheerioCrawler:SessionPool:[39m Created new Session - session_hNRTWu4qvm
+{"name":"ZyteHttpClient","hostname":"MacBook-Pro.local","pid":39062,"level":20,"msg":"send \"https://www.casinocity.com/macau/cotai/mgm-cotai/map/nearest/\" request through Zyte","time":"2025-03-09T20:42:15.040Z","v":0}
+[34mDEBUG[39m[33m CheerioCrawler:SessionPool:[39m Created new Session - session_eTtZBHy1i0
+{"name":"ZyteHttpClient","hostname":"MacBook-Pro.local","pid":39062,"level":20,"msg":"send \"https://www.casinocity.com/nebraska/lincoln/warhorse-casino-lincoln/%3Ca%20href=\" request through Zyte","time":"2025-03-09T20:42:15.044Z","v":0}
+[34mDEBUG[39m[33m CheerioCrawler:SessionPool:[39m Created new Session - session_hckvBBMFKR
+{"name":"ZyteHttpClient","hostname":"MacBook-Pro.local","pid":39062,"level":20,"msg":"send \"https://www.casinocity.com/texas/gun-barrel-city/gun-barrel-bingo/map/\" request through Zyte","time":"2025-03-09T20:42:15.047Z","v":0}
+[34mDEBUG[39m[33m CheerioCrawler:SessionPool:[39m Created new Session - session_oU64esKPoL
+{"name":"ZyteHttpClient","hostname":"MacBook-Pro.local","pid":39062,"level":20,"msg":"send \"https://www.casinocity.com/nevada/las-vegas/news/page261/\" request through Zyte","time":"2025-03-09T20:42:15.050Z","v":0}
+[34mDEBUG[39m[33m CheerioCrawler:SessionPool:[39m Created new Session - session_oH4Ng1uHqE
+{"name":"ZyteHttpClient","hostname":"MacBook-Pro.local","pid":39062,"level":20,"msg":"send \"https://www.casinocity.com/new-caledonia/noumea/grand-casino-de-noum%C3%A9a/map/\" request through Zyte","time":"2025-03-09T20:42:15.053Z","v":0}
+[34mDEBUG[39m[33m CheerioCrawler:SessionPool:[39m Created new Session - session_1MIWABPYyu
+{"name":"ZyteHttpClient","hostname":"MacBook-Pro.local","pid":39062,"level":20,"msg":"send \"https://www.casinocity.com/nevada/news/page13/\" request through Zyte","time":"2025-03-09T20:42:15.056Z","v":0}
+{"name":"ZyteHttpClient","hostname":"MacBook-Pro.local","pid":39062,"level":20,"msg":"\"3146\" length html string received from Zyte for \"https://www.casinocity.com/nebraska/lincoln/warhorse-casino-lincoln/%3Ca%20href=\" page","time":"2025-03-09T20:42:20.890Z","v":0}
+[1m[31mTypeError: The "list[0]" argument must be an instance of Buffer or Uint8Array. Received type string ('<!DOCTYPE html PUBLIC "-/...')[39m[22m
+[1m[31m    at Function.concat (node:buffer:602:13)[39m[22m
+[1m[31m    at Readable.<anonymous> (/Users/admin/Desktop/scrappersjs-framework-main/node_modules/@apify/src/streams_utilities.ts:15:39)[39m[22m
+[1m[31m    at Readable.emit (node:events:519:35)[39m[22m
+[1m[31m    at endReadableNT (node:internal/streams/readable:1696:12)[39m[22m
+[1m[31m    at processTicksAndRejections (node:internal/process/task_queues:90:21)[39m[22m
+[1m[31m[39m[22m
+[7m[1m[36m NX [39m[22m[27m [1mProcess exited with code 1, waiting for changes to restart...[22m

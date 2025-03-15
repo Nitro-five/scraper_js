@@ -1,0 +1,18 @@
+diff --git a/node_modules/@crawlee/utils/internals/sitemap.js b/node_modules/@crawlee/utils/internals/sitemap.js
+index f6f41d8..bba3b77 100644
+--- a/node_modules/@crawlee/utils/internals/sitemap.js
++++ b/node_modules/@crawlee/utils/internals/sitemap.js
+@@ -109,7 +109,12 @@ class SitemapXmlParser extends node_stream_1.Transform {
+         this.parser.onclosetag = this.onCloseTag.bind(this);
+         this.parser.ontext = this.onText.bind(this);
+         this.parser.oncdata = this.onText.bind(this);
+-        this.parser.onerror = this.destroy.bind(this);
++        this.parser.onerror = this.onerror.bind(this);
++    }
++    onerror(e) {
++        log_1.default.warning('sax parser error occured: ' + e.message)
++        this.parser.error = null
++        this.parser.resume()
+     }
+     onOpenTag(node) {
+         if (this.rootTagName !== undefined) {

@@ -1,0 +1,878 @@
+{
+  "type": "record",
+  "name": "DigitalwiresWrapperSchema",
+  "fields": [
+    {
+      "name": "digitalwires",
+      "type": {
+        "type": "record",
+        "name": "DigitalwiresSchema",
+        "fields": [
+          {
+            "name": "article_html",
+            "type": "string"
+          },
+          {
+            "name": "associations",
+            "type": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "record",
+                  "name": "ImageAssociationSchema",
+                  "fields": [
+                    {
+                      "name": "rank",
+                      "type": "int"
+                    },
+                    {
+                      "name": "renditions",
+                      "type": {
+                        "type": "array",
+                        "items": {
+                          "type": "record",
+                          "name": "RenditionSchema",
+                          "fields": [
+                            {
+                              "name": "url",
+                              "type": "string"
+                            },
+                            {
+                              "name": "fovealarea",
+                              "type": [
+                                "null",
+                                {
+                                  "type": "record",
+                                  "name": "FovealareaSchema",
+                                  "fields": [
+                                    {
+                                      "name": "bottom",
+                                      "type": [
+                                        "null",
+                                        "int"
+                                      ],
+                                      "default": null
+                                    },
+                                    {
+                                      "name": "left",
+                                      "type": [
+                                        "null",
+                                        "int"
+                                      ],
+                                      "default": null
+                                    },
+                                    {
+                                      "name": "right",
+                                      "type": [
+                                        "null",
+                                        "int"
+                                      ],
+                                      "default": null
+                                    },
+                                    {
+                                      "name": "top",
+                                      "type": [
+                                        "null",
+                                        "int"
+                                      ],
+                                      "default": null
+                                    }
+                                  ],
+                                  "doc": "Avro schema class for Fovealarea"
+                                }
+                              ],
+                              "default": null
+                            },
+                            {
+                              "name": "height",
+                              "type": [
+                                "null",
+                                "int"
+                              ],
+                              "default": null
+                            },
+                            {
+                              "name": "mimetype",
+                              "type": [
+                                "null",
+                                "string"
+                              ],
+                              "default": null
+                            },
+                            {
+                              "name": "size",
+                              "type": [
+                                "null",
+                                "int"
+                              ],
+                              "default": null
+                            },
+                            {
+                              "name": "width",
+                              "type": [
+                                "null",
+                                "int"
+                              ],
+                              "default": null
+                            }
+                          ],
+                          "doc": "Avro schema class for Rendition"
+                        },
+                        "name": "rendition"
+                      }
+                    },
+                    {
+                      "name": "type",
+                      "type": "string"
+                    },
+                    {
+                      "name": "urn",
+                      "type": "string"
+                    },
+                    {
+                      "name": "caption",
+                      "type": [
+                        "null",
+                        "string"
+                      ],
+                      "default": null
+                    },
+                    {
+                      "name": "creditline",
+                      "type": [
+                        "null",
+                        "string"
+                      ],
+                      "default": null
+                    },
+                    {
+                      "name": "headline",
+                      "type": [
+                        "null",
+                        "string"
+                      ],
+                      "default": null
+                    },
+                    {
+                      "name": "is_featureimage",
+                      "type": [
+                        "null",
+                        "boolean"
+                      ],
+                      "default": null
+                    },
+                    {
+                      "name": "version",
+                      "type": [
+                        "null",
+                        "int"
+                      ],
+                      "default": null
+                    },
+                    {
+                      "name": "version_created",
+                      "type": [
+                        "null",
+                        "string"
+                      ],
+                      "default": null
+                    }
+                  ],
+                  "doc": "Avro schema class for ImageAssociation"
+                },
+                {
+                  "type": "record",
+                  "name": "Txt2ImgAssociationSchema",
+                  "fields": [
+                    {
+                      "name": "rank",
+                      "type": "int"
+                    },
+                    {
+                      "name": "type",
+                      "type": "string"
+                    },
+                    {
+                      "name": "urn",
+                      "type": "string"
+                    },
+                    {
+                      "name": "prompt",
+                      "type": "string"
+                    },
+                    {
+                      "name": "renditions",
+                      "type": [
+                        "null",
+                        {
+                          "type": "array",
+                          "items": "RenditionSchema",
+                          "name": "rendition"
+                        }
+                      ],
+                      "default": null
+                    },
+                    {
+                      "name": "caption",
+                      "type": [
+                        "null",
+                        "string"
+                      ],
+                      "default": null
+                    },
+                    {
+                      "name": "creditline",
+                      "type": [
+                        "null",
+                        "string"
+                      ],
+                      "default": null
+                    },
+                    {
+                      "name": "headline",
+                      "type": [
+                        "null",
+                        "string"
+                      ],
+                      "default": null
+                    },
+                    {
+                      "name": "is_featureimage",
+                      "type": [
+                        "null",
+                        "boolean"
+                      ],
+                      "default": null
+                    },
+                    {
+                      "name": "version",
+                      "type": [
+                        "null",
+                        "int"
+                      ],
+                      "default": null
+                    },
+                    {
+                      "name": "version_created",
+                      "type": [
+                        "null",
+                        "string"
+                      ],
+                      "default": null
+                    }
+                  ],
+                  "doc": "Avro schema class for Txt2ImgAssociation"
+                }
+              ],
+              "name": "association"
+            }
+          },
+          {
+            "name": "categories",
+            "type": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "record",
+                  "name": "GenreCategorySchema",
+                  "fields": [
+                    {
+                      "name": "type",
+                      "type": "string"
+                    },
+                    {
+                      "name": "name",
+                      "type": "string"
+                    },
+                    {
+                      "name": "qcode",
+                      "type": "string"
+                    }
+                  ],
+                  "doc": "Avro schema class for GenreCategory"
+                },
+                {
+                  "type": "record",
+                  "name": "RubricCategorySchema",
+                  "fields": [
+                    {
+                      "name": "is_current",
+                      "type": "boolean"
+                    },
+                    {
+                      "name": "name",
+                      "type": "string"
+                    },
+                    {
+                      "name": "qcode",
+                      "type": "string"
+                    },
+                    {
+                      "name": "type",
+                      "type": "string"
+                    }
+                  ],
+                  "doc": "Avro schema class for RubricCategory"
+                }
+              ],
+              "name": "category"
+            }
+          },
+          {
+            "name": "creditline",
+            "type": "string"
+          },
+          {
+            "name": "current_rubric_names",
+            "type": {
+              "type": "array",
+              "items": "string",
+              "name": "current_rubric_name"
+            }
+          },
+          {
+            "name": "dateline",
+            "type": "string"
+          },
+          {
+            "name": "descriptions",
+            "type": {
+              "type": "array",
+              "items": {
+                "type": "record",
+                "name": "DescriptionSchema",
+                "fields": [
+                  {
+                    "name": "description",
+                    "type": "string"
+                  },
+                  {
+                    "name": "role",
+                    "type": "string"
+                  }
+                ],
+                "doc": "Avro schema class for Description"
+              },
+              "name": "description"
+            }
+          },
+          {
+            "name": "entry_id",
+            "type": "string"
+          },
+          {
+            "name": "headline",
+            "type": "string"
+          },
+          {
+            "name": "keyword_names",
+            "type": {
+              "type": "array",
+              "items": "string",
+              "name": "keyword_name"
+            }
+          },
+          {
+            "name": "language",
+            "type": "string"
+          },
+          {
+            "name": "pubstatus",
+            "type": "string"
+          },
+          {
+            "name": "rubric_names",
+            "type": {
+              "type": "array",
+              "items": "string",
+              "name": "rubric_name"
+            }
+          },
+          {
+            "name": "teaser",
+            "type": "string"
+          },
+          {
+            "name": "updated",
+            "type": "string"
+          },
+          {
+            "name": "urn",
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "type": "int"
+          },
+          {
+            "name": "autopublishnotice",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "byline",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "copyrightnotice",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "desk_names",
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "string",
+                "name": "desk_name"
+              }
+            ],
+            "default": null
+          },
+          {
+            "name": "dpasubject_names",
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "string",
+                "name": "dpasubject_name"
+              }
+            ],
+            "default": null
+          },
+          {
+            "name": "ednotes",
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": {
+                  "type": "record",
+                  "name": "EdnoteSchema",
+                  "fields": [
+                    {
+                      "name": "ednote",
+                      "type": [
+                        "null",
+                        "string"
+                      ],
+                      "default": null
+                    },
+                    {
+                      "name": "is_publishable",
+                      "type": [
+                        "null",
+                        "boolean"
+                      ],
+                      "default": null
+                    },
+                    {
+                      "name": "role",
+                      "type": [
+                        "null",
+                        "string"
+                      ],
+                      "default": null
+                    }
+                  ],
+                  "doc": "Avro schema class for Ednote"
+                },
+                "name": "ednote"
+              }
+            ],
+            "default": null
+          },
+          {
+            "name": "embargoed",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "format",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "genre_names",
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "string",
+                "name": "genre_name"
+              }
+            ],
+            "default": null
+          },
+          {
+            "name": "geosubject_names",
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "string",
+                "name": "geosubject_name"
+              }
+            ],
+            "default": null
+          },
+          {
+            "name": "infobox_html",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "kicker",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "linkbox_html",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "notepad",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "poi_names",
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "string",
+                "name": "poi_name"
+              }
+            ],
+            "default": null
+          },
+          {
+            "name": "scope_names",
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "string",
+                "name": "scope_name"
+              }
+            ],
+            "default": null
+          },
+          {
+            "name": "signal",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "subhead",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "type",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "urgency",
+            "type": [
+              "null",
+              "int"
+            ],
+            "default": null
+          },
+          {
+            "name": "usageterms",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "version_created",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "wireq_receipt",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          }
+        ],
+        "doc": "Avro schema class for Digitalwires",
+        "namespace": "de.aussiedlerbote.digitalwires.avro"
+      }
+    },
+    {
+      "name": "asb_meta",
+      "type": {
+        "type": "record",
+        "name": "AsbMetaSchema",
+        "fields": [
+          {
+            "name": "debugging_meta",
+            "type": {
+              "type": "record",
+              "name": "DebuggingMetaSchema",
+              "fields": [
+                {
+                  "name": "urn",
+                  "type": "string"
+                },
+                {
+                  "name": "creditline",
+                  "type": "string"
+                },
+                {
+                  "name": "headline",
+                  "type": "string"
+                },
+                {
+                  "name": "source_article_url",
+                  "type": "string"
+                }
+              ],
+              "doc": "Avro schema class for DebuggingMeta"
+            }
+          },
+          {
+            "name": "routing_meta",
+            "type": [
+              "null",
+              {
+                "type": "record",
+                "name": "RoutingMetaSchema",
+                "fields": [
+                  {
+                    "name": "publications",
+                    "type": [
+                      "null",
+                      {
+                        "type": "array",
+                        "items": {
+                          "type": "record",
+                          "name": "PublicationSchema",
+                          "fields": [
+                            {
+                              "name": "document_id",
+                              "type": "string"
+                            },
+                            {
+                              "name": "title",
+                              "type": "string"
+                            },
+                            {
+                              "name": "hostname",
+                              "type": "string"
+                            },
+                            {
+                              "name": "locale",
+                              "type": "string"
+                            },
+                            {
+                              "name": "all_locales",
+                              "type": [
+                                "null",
+                                {
+                                  "type": "array",
+                                  "items": "string",
+                                  "name": "all_locale"
+                                }
+                              ],
+                              "default": null
+                            },
+                            {
+                              "name": "is_sponsored",
+                              "type": [
+                                "null",
+                                "boolean"
+                              ],
+                              "default": null
+                            },
+                            {
+                              "name": "set_quota",
+                              "type": [
+                                "null",
+                                "int"
+                              ],
+                              "default": null
+                            },
+                            {
+                              "name": "distributed_amount",
+                              "type": [
+                                "null",
+                                "int"
+                              ],
+                              "default": null
+                            }
+                          ],
+                          "doc": "Avro schema class for Publication",
+                          "namespace": "de.aussiedlerbote.Publication.avro"
+                        },
+                        "name": "publication"
+                      }
+                    ],
+                    "default": null
+                  },
+                  {
+                    "name": "target_publication",
+                    "type": [
+                      "null",
+                      "de.aussiedlerbote.Publication.avro.PublicationSchema"
+                    ],
+                    "default": null
+                  },
+                  {
+                    "name": "_router_name",
+                    "type": [
+                      "null",
+                      "string"
+                    ],
+                    "default": null
+                  },
+                  {
+                    "name": "_scored_publications",
+                    "type": [
+                      "null",
+                      {
+                        "type": "record",
+                        "name": "ScoredPublicationSchema",
+                        "fields": [
+                          {
+                            "name": "publication",
+                            "type": "de.aussiedlerbote.Publication.avro.PublicationSchema"
+                          },
+                          {
+                            "name": "routing_layer_results",
+                            "type": {
+                              "type": "array",
+                              "items": {
+                                "type": "record",
+                                "name": "RoutingLayerResultSchema",
+                                "fields": [
+                                  {
+                                    "name": "routing_score",
+                                    "type": "float"
+                                  },
+                                  {
+                                    "name": "routing_layer",
+                                    "type": {
+                                      "type": "record",
+                                      "name": "RoutingLayerSchema",
+                                      "fields": [
+                                        {
+                                          "name": "top_k_publications",
+                                          "type": "int"
+                                        },
+                                        {
+                                          "name": "score_weight",
+                                          "type": "float"
+                                        }
+                                      ],
+                                      "doc": "Avro schema class for RoutingLayer"
+                                    }
+                                  }
+                                ],
+                                "doc": "Avro schema class for RoutingLayerResult"
+                              },
+                              "name": "routing_layer_result"
+                            }
+                          },
+                          {
+                            "name": "final_score",
+                            "type": [
+                              "null",
+                              "float"
+                            ],
+                            "default": null
+                          }
+                        ],
+                        "doc": "Avro schema class for ScoredPublication"
+                      }
+                    ],
+                    "default": null
+                  }
+                ],
+                "doc": "Avro schema class for RoutingMeta"
+              }
+            ],
+            "default": null
+          },
+          {
+            "name": "rewriting_meta",
+            "type": [
+              "null",
+              {
+                "type": "record",
+                "name": "RewritingMetaSchema",
+                "fields": [
+                  {
+                    "name": "enriched_data",
+                    "type": [
+                      "null",
+                      "string"
+                    ],
+                    "default": null
+                  }
+                ],
+                "doc": "Avro schema class for RewritingMeta"
+              }
+            ],
+            "default": null
+          }
+        ],
+        "doc": "Avro schema class for AsbMeta"
+      }
+    }
+  ],
+  "doc": "Avro schema class for DigitalwiresWrapper",
+  "namespace": "de.aussiedlerbote.digitalwireswrapper.avro"
+}

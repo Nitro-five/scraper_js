@@ -1,0 +1,7 @@
+{
+  "name": "scrapper",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/scrapper/src",
+  "projectType": "library",
+  "tags": []
+}

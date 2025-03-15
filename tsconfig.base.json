@@ -1,0 +1,30 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2021",
+    "module": "esnext",
+    "lib": ["ES2021", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "strict": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "paths": {
+      "@universal-scrapper/crawler": ["libs/crawler/src/index.ts"],
+      "@universal-scrapper/generator": ["libs/crawler-generator/src/index.ts"],
+      "@universal-scrapper/infrastructure": ["libs/infrastructure/src/index.ts"],
+      "@universal-scrapper/logger": ["libs/logger/src/index.ts"],
+      "@universal-scrapper/scrapper": ["libs/scrapper/src/index.ts"],
+      "@universal-scrapper/test": ["libs/test/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

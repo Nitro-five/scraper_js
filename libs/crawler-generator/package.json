@@ -1,0 +1,16 @@
+{
+  "name": "@universal-scrapper/generator",
+  "version": "0.0.1",
+  "dependencies": {
+    "@nx/devkit": "19.6.5",
+    "tslib": "^2.3.0",
+    "@nx/node": "^19.6.5",
+    "@nx/webpack": "^19.6.5",
+    "@universal-scrapper/crawler": "0.0.1"
+  },
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
+  "private": true,
+  "generators": "./generators.json"
+}

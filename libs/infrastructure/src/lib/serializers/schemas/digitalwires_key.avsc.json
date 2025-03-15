@@ -1,0 +1,23 @@
+{
+  "type": "record",
+  "name": "DigitalWiresKey",
+  "namespace": "de.aussiedlerbote.key.digitalwires.key.avro",
+  "fields": [
+    {
+      "name": "urn",
+      "type": "string"
+    },
+    {
+      "name": "version",
+      "type": "int"
+    },
+    {
+      "name": "creditline",
+      "type": "string"
+    },
+    {
+      "name": "language",
+      "type": "string"
+    }
+  ]
+}

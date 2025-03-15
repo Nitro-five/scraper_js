@@ -1,0 +1,20 @@
+name: scrappersjs-e2e
+
+services:
+  redpanda:
+    image: redpandadata/redpanda:v23.1.7
+    environment:
+      - REDPANDA_AUTO_CREATE_TOPICS=true
+      - REDPANDA_DEVELOPER_MODE=true
+    ports:
+      - '9092:9092' # Kafka port
+    command:
+      - redpanda
+      - start
+      - --overprovisioned
+      - --smp 1
+      - --memory 1G
+      - --reserve-memory 0M
+      - --node-id 0
+      - --check=false
+      - --advertise-kafka-addr=localhost:9092

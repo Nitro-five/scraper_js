@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "crawler": {
+      "factory": "./src/generator",
+      "schema": "./src/schema.json",
+      "description": "libs/crawler-generator/src/generator generator"
+    }
+  }
+}

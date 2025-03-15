@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "ResourseGenerator",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Project name",
+      "x-prompt": "What's the project name?"
+    },
+    "fetch": {
+      "type": "string",
+      "description": "Provide the crawler type",
+      "x-prompt": {
+        "message": "Provide the crawler type",
+        "type": "list",
+        "items": [
+          {
+            "value": "browser",
+            "label": "Browser"
+          },
+          {
+            "value": "direct",
+            "label": "Direct"
+          },
+          {
+            "value": "zyte",
+            "label": "Zyte"
+          }
+        ]
+      }
+    }
+  },
+  "required": ["name", "fetch"]
+}

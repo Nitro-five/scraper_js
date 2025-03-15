@@ -1,0 +1,217 @@
+import {
+  CrawlerArticle,
+  CrawlerElement,
+  CrawlerPage,
+  CrawlerRequest,
+  CrawlerInitialRequest,
+  getPageLanguage,
+  PageLabel,
+  ZyteResourceCrawler,
+  parseToISODate,
+} from '@universal-scrapper/crawler';
+import type { CrawlingContext } from '@crawlee/core';
+import { ImageAssociationSchema, getUrnForUrl, hash } from '@universal-scrapper/infrastructure';
+import {
+  EXCLUDED_HEADLINES,
+  generateKeywords,
+  GENRE,
+  QUERIES_TO_REMOVE,
+  removeHtmlByQueries,
+  replaceKeywords,
+} from './utils';
+
+// Initial requests to crawl sitemap of Website
+export const initialRequests: CrawlerInitialRequest[] = [
+  { sitemap: 'https://<%= fileName %>.com/sitemap.xml' },
+];
+
+// Main Crawler class for Website
+export class <%= className %>Crawler extends ZyteResourceCrawler {
+  // Define selectors for extracting article content
+  private readonly articleQueries = ['.article-page .body'];
+
+  // Extract additional requests for crawling links
+  async extractRequests({ enqueueLinks }: { enqueueLinks: CrawlingContext['enqueueLinks'] }) {
+    // Enqueue links within the same hostname and label them as articles
+    return enqueueLinks({ strategy: 'same-hostname', label: PageLabel.Article });
+  }
+
+  // Extract articles and their metadata from a given page
+  async extractArticles(page: CrawlerPage, request: CrawlerRequest): Promise<CrawlerArticle[]> {
+    // Extract main article content
+    const article = await this.extractArticle(page);
+    if (!article) {
+      this.logger.info(
+        `Skipping article due to no content found for queries: ${this.articleQueries.join(', ')}`
+      );
+      return [];
+    }
+
+    // Extract headline
+    const headline = await this.getHeadline(page, request);
+
+    // Extract teaser (subheading)
+    const teaser = await this.getTeaser(page);
+    if (!teaser) {
+      throw new Error(`No teaser extracted for "${request.loadedUrl}"`);
+    }
+
+    // Description roles for the article
+    const descriptions = [
+      { role: 'title', description: headline },
+      { role: 'description', description: teaser },
+    ];
+
+    // Fetch the full HTML content of the page
+    const html = await page.innerHTML();
+    if (!html) {
+      throw new Error(`No content found for "${request.loadedUrl}"`);
+    }
+
+    // Extract publication dates
+    const dates = await this.getDates(page);
+
+    // // Fetch associations such as images
+    const associations = await this.getAssociations(page, teaser);
+
+    // Clean the HTML content using predefined queries
+    const cleanedHtml = await removeHtmlByQueries(article, QUERIES_TO_REMOVE);
+    if (!cleanedHtml) {
+      throw new Error(`Failed to clean HTML content for "${request.loadedUrl}"`);
+    }
+
+    // Process HTML and generate keywords
+    const article_html = replaceKeywords(cleanedHtml);
+    const keyword_names = generateKeywords(cleanedHtml);
+
+    this.logger.debug(`Article "${headline}" extracted successfully`);
+
+    // Return the extracted article data
+    return [
+      {
+        digitalwires: {
+          headline,
+          teaser,
+          dateline: dates.line,
+          version_created: dates.created,
+          updated: dates.updated,
+          associations: associations.map((association) => ({
+            'de.aussiedlerbote.digitalwires.avro.ImageAssociationSchema': association,
+          })),
+          descriptions,
+          article_html,
+          keyword_names,
+          version: 1,
+          pubstatus: 'usable',
+          urn: getUrnForUrl(request.url),
+          creditline: request.url,
+          language: await getPageLanguage(page, request),
+          current_rubric_names: [request.url],
+          rubric_names: [request.url],
+          genre_names: [GENRE],
+          categories: [],
+        },
+        asb_meta: {
+          debugging_meta: {
+            urn: getUrnForUrl(request.url),
+            creditline: request.url,
+            headline,
+            source_article_url: request.url,
+          },
+        },
+      },
+    ];
+  }
+
+  // Get publication dates from metadata
+  private async getDates(
+    page: CrawlerPage
+  ): Promise<{ line: string; created: string; updated: string }> {
+    const dateElement = await page.querySelector('meta[property="article:published_time"]');
+    const parsedDate = parseToISODate(await dateElement?.getAttribute('content'));
+    if (parsedDate) {
+      return {
+        line: parsedDate,
+        created: parsedDate,
+        updated: parsedDate,
+      };
+    }
+    // If no date is found or can't be parsed, throw an error
+    throw new Error('No publication date found for the page or date parsing failed.');
+  }
+
+  // Extract the headline of the article
+  private async getHeadline(page: CrawlerPage, request: CrawlerRequest): Promise<string> {
+    // Use the specific selector to find the headline
+    let headline = await page.querySelector('.head h1').then((e) => e?.innerText());
+    if (!headline) {
+      throw new Error(`No headline extracted for "${request.loadedUrl}"`);
+    }
+    headline = headline.trim();
+
+    // Check if headline is excluded
+    if (EXCLUDED_HEADLINES.includes(headline)) {
+      throw new Error(`Excluded headline: "${headline}"`);
+    }
+
+    // Replace certain keywords in the headline
+    return replaceKeywords(headline);
+  }
+
+  // Extract associations (e.g., images) for the article
+  private async getAssociations(
+    page: CrawlerPage,
+    teaser: string
+  ): Promise<ImageAssociationSchema[]> {
+    // Try to find images using the primary selector
+    const images = await page.querySelectorAll('.featured-image img');
+    if (!images) {
+      return [];
+    }
+
+    // Map the images to association objects
+    const associations = await Promise.all(
+      images.map<Promise<ImageAssociationSchema | null>>(async (image, rank) => {
+        const url = (await image.getAttribute('src')) || (await image.getAttribute('data-lazy'));
+        return url
+          ? {
+              rank,
+              renditions: [
+                {
+                  url,
+                },
+              ],
+              urn: hash(url),
+              caption: teaser,
+              type: 'image',
+            }
+          : null;
+      })
+    );
+
+    return associations.filter((item) => item !== null);
+  }
+
+  // Extract teaser (subheading) of the article
+  private async getTeaser(page: CrawlerPage) {
+    // Extract the teaser from the meta description
+    const teaser = await page
+      .querySelector('meta[name="description"]')
+      .then((e) => e?.getAttribute('content'));
+
+    // Replace certain keywords in the teaser text
+    return teaser ? replaceKeywords(teaser) : null;
+  }
+
+  // Extract the main content of the article
+  private async extractArticle(page: CrawlerPage): Promise<CrawlerElement | undefined> {
+    // Iterate through defined queries to find the article content
+    let article = null;
+    for (const query of this.articleQueries) {
+      article = await page.querySelector(query);
+      if (article) {
+        return article;
+      }
+    }
+  }
+}

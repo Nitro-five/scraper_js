@@ -1,0 +1,16 @@
+import { <%= className %>Crawler, initialRequests } from './<%= fileName %>-crawler';
+import { Scrapper, getEnvValueOrFail, getMaxRequestPerCrawl } from '@universal-scrapper/scrapper';
+
+const main = async () => {
+  const crawler = new <%= className %>Crawler({
+    initialRequests,
+    maxRequestsPerCrawl: getMaxRequestPerCrawl(),
+    zyteApiKey: getEnvValueOrFail('zyteApiKey'),
+  });
+  const scrapper = new Scrapper(crawler);
+
+  await scrapper.init();
+  await scrapper.run();
+};
+
+main();

@@ -1,0 +1,13 @@
+{
+  "name": "@universal-scrapper/infrastructure",
+  "version": "0.0.1",
+  "dependencies": {
+    "kafkajs": "^2.2.4",
+    "avsc": "^5.7.7",
+    "tslib": "^2.3.0"
+  },
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
+  "private": true
+}

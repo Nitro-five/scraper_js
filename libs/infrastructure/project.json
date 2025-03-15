@@ -1,0 +1,7 @@
+{
+  "name": "infrastructure",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/infrastructure/src",
+  "projectType": "library",
+  "tags": []
+}

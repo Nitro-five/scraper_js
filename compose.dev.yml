@@ -1,0 +1,99 @@
+# version: '3.8'
+services:
+  crawlab:
+    image: crawlabteam/crawlab
+    restart: on-failure
+    environment:
+      CRAWLAB_NODE_MASTER: 'Y' # Y: master node
+      CRAWLAB_MONGO_HOST: 'mongo' # mongo host address. In the docker compose network, directly refer to the service name
+      CRAWLAB_MONGO_PORT: '27017' # mongo port
+      CRAWLAB_MONGO_DB: 'crawlab' # mongo database
+      CRAWLAB_MONGO_USERNAME: 'username' # mongo username
+      CRAWLAB_MONGO_PASSWORD: 'password' # mongo password
+      CRAWLAB_MONGO_AUTHSOURCE: 'admin' # mongo auth source
+    volumes:
+      - crawlab_data:/opt/.crawlab/master:/root/.crawlab # persistent crawlab metadata
+      - crawlab_data:/opt/crawlab/master:/data # persistent crawlab data
+      - crawlab_data:/var/crawlab/log:/var/log/crawlab # log persistent
+    ports:
+      - '8080:8080' # exposed api port
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:4.2
+    restart: on-failure
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: 'username' # mongo username
+      MONGO_INITDB_ROOT_PASSWORD: 'password' # mongo password
+    volumes:
+      - crawlab_data:/opt/.crawlab/master:/root/.crawlab # persistent crawlab metadata
+      - crawlab_data:/opt/crawlab/mongo/data/db:/data/db # persistent mongo data
+    ports:
+      - '27017:27017' # expose mongo port to host machine
+
+  redpanda:
+    image: redpandadata/redpanda:v23.1.7
+    environment:
+      - REDPANDA_AUTO_CREATE_TOPICS=true
+      - REDPANDA_DEVELOPER_MODE=true
+      - REDPANDA_SCHEMA_REGISTRY_ENABLED=true
+      - REDPANDA_SCHEMA_REGISTRY_URLS=["http://localhost:8081"]
+      - REDPANDA_SCHEMA_REGISTRY_TLS_ENABLED=false
+    ports:
+      - '9092:9092' # Kafka port
+      - '9644:9644' # Redpanda admin API
+      - '18081:18081' # Schema Registry API
+    command:
+      - redpanda
+      - start
+      - --overprovisioned
+      - --smp 1
+      - --memory 1G
+      - --reserve-memory 0M
+      - --node-id 0
+      - --check=false
+      # Add redpanda or host.docker.internal to your local /etc/hosts
+      # if you want to run scrapper locally with successfully publishing to kafka
+      - --advertise-kafka-addr=redpanda:9092
+#     - --advertise-kafka-addr=host.docker.internal:9092
+      # Enable Schema Registry API (NEW)
+      - --schema-registry-addr internal://0.0.0.0:8081,external://0.0.0.0:18081
+    volumes:
+      - redpanda_data:/var/lib/redpanda/data
+
+  redpanda-console:
+    container_name: redpanda-console
+    image: docker.redpanda.com/redpandadata/console:v2.3.1
+    entrypoint: /bin/sh
+    command: -c 'echo "$$CONSOLE_CONFIG_FILE" > /tmp/config.yml; /app/console'
+    environment:
+      CONFIG_FILEPATH: /tmp/config.yml
+      CONSOLE_CONFIG_FILE: |
+        kafka:
+          brokers: ["redpanda:9092"]
+          schemaRegistry:
+            enabled: true
+            urls: ["http://redpanda:8081"]
+        redpanda:
+          adminApi:
+            enabled: true
+            urls: ["http://redpanda:9644"]
+    ports:
+      - "8383:8080"
+    depends_on:
+      - redpanda
+
+  kafdrop:
+    image: obsidiandynamics/kafdrop
+    ports:
+      - '9000:9000'
+    environment:
+      KAFKA_BROKERCONNECT: 'redpanda:9092'
+    depends_on:
+      - redpanda
+
+volumes:
+  redpanda_data:
+  crawlab_data:
+  crawler_data:
